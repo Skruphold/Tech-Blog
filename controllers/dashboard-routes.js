@@ -20,3 +20,5 @@ router.get('/', withAuth, (req, res) => {
         res.redirect("login")
     });
 });
+
+module.exports = router;
