@@ -21,4 +21,27 @@ router.get('/', withAuth, (req, res) => {
     });
 });
 
+router.get('/', withAuth, (req, res) => {
+    Post.findByPk(req.params.id, {
+        include: [
+            User, 
+            {
+                model: Comment,
+                include: [user],
+            },
+        ],
+    })
+    .then((postData) => {
+        if (postData) {
+            const post = postData.get({ plain: true });
+            res.render("single-post", { post })
+        } else {
+            res.status(404).end();
+        }
+    })
+    .catch((err) => {
+        res.status(500).json(err);
+    });
+});
+
 module.exports = router;
