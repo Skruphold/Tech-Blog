@@ -2,23 +2,23 @@ const router = require('express').Router();
 const { Post } = require('../models');
 const withAuth = require('../utils/auth');
 
-router.get('/', withAuth, (req, res) => {
-    Post.findAll({
-        where: {
-            userId: req.session.userId
-        }
-    })
-    .then((postData) => {
-        const posts = postData.map((post) => post.get({ plain: true }));
-        res.render("all-posts-admin", { 
-            layout: "dashboard",
-            posts 
-        }); 
-    })
-    .catch((err) => {
+
+router.get('/', async (req, res) => {
+    try {
+        res.render('all-posts-admin', { layout: 'dashboard' })
+    } catch (err) {
+        console.log(err);
         res.status(500).json(err);
-        res.redirect("login")
-    });
+    }
+});
+
+router.get('/new', async (req, res) => {
+    try {
+        res.status(200).render('new-post', { layout: 'dashboard' });
+    } catch (err) {
+        console.log(err);
+        res.status(500).json(err);
+    }
 });
 
 module.exports = router;
