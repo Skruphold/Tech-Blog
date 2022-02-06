@@ -29,6 +29,7 @@ Permission is hereby granted, free of charge, to any person obtaining a copy of 
 
 ## Usage
 - Visit the Link below then just sign-up and start posting. 
+- [tech blog link](https://floating-beyond-04217.herokuapp.com/)
 
 
 ## features
